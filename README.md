@@ -83,14 +83,14 @@ if ( aData.isObject() ) {
     JSWrapperArguments args; // Create the arguments to pass to b
     args.append( 23.1 );
 
-    bFuncData->call( &args, global, &rcData );
+    bFuncData.object()->call( &args, aData.object(), &rcData );
     std::cout << rcData.toNumber() << std::endl; // 46.2
 }
 delete global; // Cleanup
 
 ```
 
-Here we read global variables from the JavaScript context and call a function inside a JavaScript object. Calling a JavaScript function also expects an object to define the context the function should work in, in this case we used the global object.
+Here we read global variables from the JavaScript context and call a function inside a JavaScript object. Calling a JavaScript function also expects an object to define the context the function should work in, in this case we specified the a object as the function context as b is located inside a, however we could also have used the global object or any other object.
 
 ###Accessing Arrays
 
@@ -103,8 +103,7 @@ aData.object()-get( "a", &aData );
 
 if ( aData.isObject() && aData.object()->isArray() ) {
 
-    int length; 
-    aData.object()->getArrayLength( &length );
+    int length; aData.object()->getArrayLength( &length );
     for ( int i=0; i < length; i < length ) {
         JSWrapperData data;
         aData.object()->getArrayElement( i, &data );
@@ -193,6 +192,9 @@ class Dog
 {
     public:    
     Dog( void ) { m_name="Unnamed"; }
+
+    void giveFood( void ) {}
+
     std::string m_name;
 };
 
@@ -204,10 +206,10 @@ JSWRAPPER_CONSTRUCTOR( DogConstructor, "Dog" )
 
 JSWRAPPER_CONSTRUCTOR_END
 
-JSWRAPPER_FUNCTION( testFunc )
+JSWRAPPER_FUNCTION( giveFood )
 
     Dog *dog=(Dog *) JSWRAPPER_FUNCTION_GETCLASS
-    // Do something
+    dog->giveFood();
 
 JSWRAPPER_FUNCTION_END
 
@@ -239,11 +241,11 @@ int main(int argc, char** argv)
     JSWrapperObject *global=jsWrapper.globalObject();
 
     JSWrapperClass *dogClass=global->createClass( "Dog", DogConstructor );
-    dogClass->registerFunction( "testFunc", testFunc );
+    dogClass->registerFunction( "giveFood", giveFood );
     dogClass->registerProperty( "name", GetDogProperty_name, SetDogProperty_name );
     dogClass->install();
 
-    jsWrapper.execute( "var dog=new Dog(); dog.name=\"Snickers\"; print( dog.name ); dog.testFunc(); " );
+    jsWrapper.execute( "var dog=new Dog(); dog.name=\"Snickers\"; print( dog.name ); dog.giveFood(); " );
 
     delete global;
     delete dogClass;
@@ -296,7 +298,7 @@ JSWRAPPER_FUNCTION( myFunction )
     myPersistentObject=args[0].object()-copy();
 ```
 
-myPersistentObject is protected, i.e. garbage collectors will not touch it until you delete the object. This is very useful for callback and objects which work async on the C++ side, like a callback function for an async network request.
+myPersistentObject is protected, i.e. garbage collectors will not touch it until you delete the object. This is very useful for callbacks and objects which work async on the C++ side, like a callback function for an async network request.
 
 ###Todos
 
