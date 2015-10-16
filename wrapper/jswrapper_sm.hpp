@@ -53,7 +53,9 @@ public:
 	// --- Run GC
 	void gc( void ) { JS_GC( m_rt );  }
 
-public:
+	bool isValid( void ) { return m_isValid; }
+
+private:
 
 	JSRuntime               *m_rt;
 	JSContext               *m_cx; 	

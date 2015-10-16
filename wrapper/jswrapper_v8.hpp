@@ -74,7 +74,9 @@ public:
 	// --- Run GC
 	void gc( void ) { while(! m_isolate->IdleNotification( 100 ) ) {}; }
 
-public:
+	bool isValid( void ) { return m_isValid; }
+
+private:
 
 	v8::Platform            *m_platform;
 	v8::Isolate             *m_isolate;

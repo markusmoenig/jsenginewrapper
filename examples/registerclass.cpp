@@ -74,7 +74,7 @@ JSWRAPPER_SETPROPERTY_END
 int main(int argc, char** argv)
 {
     JSWrapper jsWrapper( argv[0] );
-    if ( !jsWrapper.m_isValid ) {
+    if ( !jsWrapper.isValid() ) {
         printf("Unable to Initialize JavaScript Wrapper.\n");
         return 1;
     }
