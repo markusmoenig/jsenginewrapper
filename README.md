@@ -1,6 +1,6 @@
 # JSEngineWrapper
 
-##A simple to use JavaScript Engine Wrapper for v8 and SpiderMonkey under the MIT license
+##An easy to use JavaScript Engine Wrapper for v8 and SpiderMonkey under the MIT license
 
 JavaScript is a great language and there are several, fast JIT based JavaScript engines under heavy development. Things are very dynamic with complex APIs being changed at whim. The reasons for me to create a C++ wrapper were:
 
@@ -296,7 +296,7 @@ JSWRAPPER_FUNCTION( myFunction )
     myPersistentObject=args[0].object()-copy();
 ```
 
-myPersistentObject is protected, i.e. garbage collectors will not touch it until you delete the object. This is very useful for callback and objects which work async on the C++ side, like a calback function for an async network request.
+myPersistentObject is protected, i.e. garbage collectors will not touch it until you delete the object. This is very useful for callback and objects which work async on the C++ side, like a callback function for an async network request.
 
 ###Todos
 
@@ -305,4 +305,4 @@ myPersistentObject is protected, i.e. garbage collectors will not touch it until
 
 ###Contact
 
-For feature requests or questions please contact me at markusm@visualgraphics.tv.
+For feature requests or questions contact me at markusm@visualgraphics.tv.
