@@ -42,7 +42,7 @@ public:
 
 	// --- Getter/Setter
 	bool get( const char *name, JSWrapperData *data=NULL );
-	void set( const char *name, JSWrapperData data );
+	void set( const char *name, JSWrapperData& data );
 
 	// --- Function
 	bool isFunction( void ) { return m_obj.Get( m_isolate )->IsCallable(); }

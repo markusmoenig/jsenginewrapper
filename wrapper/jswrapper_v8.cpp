@@ -58,7 +58,9 @@ void JSWRAPPER_BUILDARGS( JSWrapperArguments *args, const FunctionCallbackInfo<V
         } else
         if ( (*v8args)[i]->IsObject() )
         {
-            args->append( new JSWrapperObject( v8args->GetIsolate(), (*v8args)[i]->ToObject() ) );
+            JSWrapperObject *object=new JSWrapperObject( v8args->GetIsolate(), (*v8args)[i]->ToObject() );
+            args->append( object );
+            delete object;
         }
     }
 }

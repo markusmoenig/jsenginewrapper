@@ -42,7 +42,7 @@ public:
 
 	// --- Getter/Setter
 	bool get( const char *name,  JSWrapperData *data );
-	void set( const char *name,  JSWrapperData data );	
+	void set( const char *name,  JSWrapperData& data );	
 
 	JS::Value *getSMValue( void ) { return m_rawValue; }
 

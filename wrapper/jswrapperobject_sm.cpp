@@ -93,7 +93,7 @@ bool JSWrapperObject::get( const char *name, JSWrapperData *data )
     return ok;
 }
 
-void JSWrapperObject::set( const char *name,  JSWrapperData data )
+void JSWrapperObject::set( const char *name,  JSWrapperData& data )
 {
     RootedObject object( m_cx, &m_rawValue->toObject() );
 

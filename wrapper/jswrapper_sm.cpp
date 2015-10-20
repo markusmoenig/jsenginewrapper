@@ -66,7 +66,9 @@ void JSWRAPPER_BUILDARGS( JSContext *cx, JSWrapperArguments *args, int argc, JS:
         else
         if ( (*smargs)[i].isObject() )
         {
-            args->append( new JSWrapperObject( cx, &(*smargs)[i].toObject() ) );
+            JSWrapperObject *object=new JSWrapperObject( cx, &(*smargs)[i].toObject() );
+            args->append( object );
+            delete object;
         }
         else
         if ( (*smargs)[i].isUndefined() )

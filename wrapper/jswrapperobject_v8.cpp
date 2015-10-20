@@ -75,7 +75,7 @@ bool JSWrapperObject::get( const char *name, JSWrapperData *data )
     return true;
 }
 
-void JSWrapperObject::set( const char *name, JSWrapperData data )
+void JSWrapperObject::set( const char *name, JSWrapperData& data )
 {
     Local<String> nameValue = String::NewFromUtf8( m_isolate, name, NewStringType::kNormal ).ToLocalChecked();
 
